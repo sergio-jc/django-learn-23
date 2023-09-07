@@ -1,6 +1,7 @@
-from rest_framework import status, generics
+from rest_framework import status, generics, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 from restaurants.models import Dish, Restaurant
 from restaurants.serializer import DishSerializer, RestaurantSerializer
 from restaurants.permissions import IsAdminOrChefOrReadOnly, IsAdminOrReadOnly
@@ -58,9 +59,16 @@ class RestaurantListCreateApiVie(generics.ListCreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    search_fields = ["name"]
+    ordering_fields = ["capacity"]
 
 
 class RestaurantRetraiveUdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    # permission_classes = [IsAdminOrReadOnly]

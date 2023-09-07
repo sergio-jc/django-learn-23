@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Installed apps
     "corsheaders",
     "rest_framework",
+    "django_filters",
     # Created apps
     "users",
     "restaurants",
