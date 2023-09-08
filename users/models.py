@@ -15,7 +15,11 @@ class Employee(models.Model):
         (OTHER, "other"),
     )
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default=OTHER)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
 
     def __str__(self):
         return f"{self.role} - {self.user.username}"
@@ -30,7 +34,11 @@ class Consumer(models.Model):
         (PREMIUM, "premium"),
         (OTHER, "other"),
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=OTHER)
 
     def __str__(self):

@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
 # from django_filters.rest_framework import DjangoFilterBackend
-from restaurants.models import Dish, Restaurant
-from restaurants.serializer import DishSerializer, RestaurantSerializer
+from restaurants.models import Dish, Restaurant, Menu
+from restaurants.serializer import DishSerializer, RestaurantSerializer, MenuSerializer
 from restaurants.permissions import IsAdminOrChefOrReadOnly, IsAdminOrReadOnly
 from custom_list_create import CustomListCreateAPIView
 
@@ -76,3 +76,14 @@ class RestaurantRetraiveUdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
     # permission_classes = [IsAdminOrReadOnly]
+
+
+class MenuListCreateApiView(CustomListCreateAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
+
+class MenuRetraiveUdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer

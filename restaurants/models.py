@@ -39,6 +39,7 @@ class Dish(models.Model):
         (OTHER, "other"),
     )
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=OTHER)
+    menu = models.ManyToManyField(Menu, related_name="menu_item")
 
     def __str__(self):
         return self.name
