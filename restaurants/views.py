@@ -84,6 +84,7 @@ class MenuListCreateApiView(CustomListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ["name"]
 
+
 class MenuRetrieveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
