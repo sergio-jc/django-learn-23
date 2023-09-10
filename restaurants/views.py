@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
 # from django_filters.rest_framework import DjangoFilterBackend
 from restaurants.models import Dish, Restaurant, Menu
-from restaurants.serializer import DishSerializer, RestaurantSerializer, MenuSerializer
+from restaurants.serializers import DishSerializer, RestaurantSerializer, MenuSerializer
 # from restaurants.permissions import IsAdminOrChefOrReadOnly, IsAdminOrReadOnly
 from custom_list_create import CustomListCreateAPIView
 

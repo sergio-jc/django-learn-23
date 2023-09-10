@@ -15,15 +15,10 @@ class Menu(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} / {self.restaurant.name}"
+        return self.name
 
 
 class Dish(models.Model):
-    name = models.CharField(max_length=225, unique=True)
-    description = models.TextField(blank=True, null=True, default="")
-    price = models.IntegerField(blank=True, default=0)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     APPETIZER = "APPETIZER"
     BEVERAGE = "BEVERAGE"
     MAIN_COURSE = "MAIN_COURSE"
@@ -38,6 +33,11 @@ class Dish(models.Model):
         (SIDE, "side"),
         (OTHER, "other"),
     )
+    name = models.CharField(max_length=225, unique=True)
+    description = models.TextField(blank=True, null=True, default="")
+    price = models.IntegerField(blank=True, default=0)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=OTHER)
     menu = models.ManyToManyField(Menu, related_name="menu_item")
 
