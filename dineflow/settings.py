@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Created apps
     "users",
     "restaurants",
+    "orders",
 ]
 
 MIDDLEWARE = [
