@@ -23,6 +23,8 @@ class MenuSerializer(ModelSerializer):
         fields = ["id", "name", "updated_at", "restaurant", "menu_item"]
 
     def create(self, validated_data):
+        context_request = self.context['request']
+        print('request context => \n', context_request)
         restaurant = Restaurant.objects.get(pk=self.initial_data["restaurant"])
         validated_data["restaurant"] = restaurant
         return Menu.objects.create(**validated_data)
