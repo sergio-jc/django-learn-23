@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, permissions
 from users.models import *
 from users.serializers import *
+
 
 class UserListApiView(generics.ListAPIView):
     queryset = User.objects.all()
@@ -24,10 +25,12 @@ class ConsumerRetraiveApiView(generics.RetrieveAPIView):
 
 
 class EmployeeListApiView(generics.ListAPIView):
+    permission_classes = [permissions.IsAdminUser]
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
 
 class EmployeeRetraiveApiView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAdminUser]
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer

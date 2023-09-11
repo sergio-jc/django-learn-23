@@ -1,4 +1,4 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import BasePermission, DjangoModelPermissions
 from users.models import Employee
 
 
@@ -30,3 +30,37 @@ class IsAdminOrChef(BasePermission):
         if request.user.is_staff:
             return True
         isChef(request=request)
+
+
+# class IsChef(DjangoModelPermissions):
+#     def has_permission(self, request, view):
+#         print("=> \n", self, request, view)
+#         return super().has_permission(request, view)
+#     perms_map = {
+#         "GET": ["%(app_label)s.view%(model_name)s"],
+#         "OPTIONS": [],
+#         "HEAD": [],
+#         "POST": ["%(app_label)s.add_%(model_name)s"],
+#         "PUT": ["%(app_label)s.change_%(model_name)s"],
+#         "PATCH": ["%(app_label)s.change_%(model_name)s"],
+#         "DELETE": ["%(app_label)s.delete_%(model_name)s"],
+#     }
+
+
+class IsChef(DjangoModelPermissions):
+    # def has_permission(self, request, view):
+    #     user= request.user
+    #     print("secio => \n",user.get_all_permissions())
+    #     if user.has_perm('restaurants.view_restaurant'):
+    #         return True
+    #     return False
+
+    perms_map = {
+        "GET": ["%(app_label)s.view_%(model_name)s"],
+        "OPTIONS": [],
+        "HEAD": [],
+        "POST": ["%(app_label)s.add_%(model_name)s"],
+        "PUT": ["%(app_label)s.change_%(model_name)s"],
+        "PATCH": ["%(app_label)s.change_%(model_name)s"],
+        "DELETE": ["%(app_label)s.delete_%(model_name)s"],
+    }
