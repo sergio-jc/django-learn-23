@@ -30,7 +30,7 @@ class MenuSerializer(ModelSerializer):
         return Menu.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        print("🚀 => \n", self.initial_data["menu_item"])
+        # print("🚀 => \n", self.initial_data["menu_item"])
         dish_ids = [dish['id'] for dish in self.initial_data["menu_item"]]
         instance.menu_item.set(dish_ids)
         return super().update(instance, validated_data)

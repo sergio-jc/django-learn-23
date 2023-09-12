@@ -1,10 +1,11 @@
+from django.shortcuts import render
 from rest_framework import generics, filters
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from restaurants.models import Dish, Restaurant, Menu
 from restaurants.serializers import *
 from restaurants.permissions import IsChef
-from custom_list_create import CustomListCreateAPIView
+from restaurants.custom_list_create import CustomListCreateAPIView
 
 
 class DishListCreateApiView(generics.ListCreateAPIView):
@@ -16,7 +17,7 @@ class DishListCreateApiView(generics.ListCreateAPIView):
         filters.SearchFilter,
         filters.OrderingFilter,
     ]
-    filterset_fields = ['type']
+    filterset_fields = ["type"]
     search_fields = ["name"]
     ordering_fields = ["price"]
 

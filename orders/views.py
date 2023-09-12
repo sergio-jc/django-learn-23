@@ -1,3 +1,5 @@
+from django.shortcuts import render
+
 from rest_framework import status, generics, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,6 +12,13 @@ from orders.permissions import IsWaiter
 
 # from restaurants.permissions import IsAdminOrChefOrReadOnly, IsAdminOrReadOnly
 
+from django.utils.translation import gettext as _
+
+
+def index(request):
+    context = {"hello": _("Hello")}
+
+    return render(request, "index.html", context)
 
 class TableListCreateApiView(generics.ListCreateAPIView):
     permission_classes = [IsWaiter]
