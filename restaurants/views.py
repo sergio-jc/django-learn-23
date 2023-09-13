@@ -7,6 +7,15 @@ from restaurants.serializers import *
 from restaurants.permissions import IsChef
 from restaurants.custom_list_create import CustomListCreateAPIView
 from rest_framework.throttling import UserRateThrottle
+from django.utils.translation import gettext as _
+
+
+def dish_list_html(request):
+    dishes = DishSerializer(Dish.objects.all(), many=True).data
+    context = {"dishes": dishes}
+
+    return render(request, "dish_list.html", context)
+
 
 class DishListCreateApiView(generics.ListCreateAPIView):
     throttle_classes = [UserRateThrottle]

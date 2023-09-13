@@ -26,7 +26,8 @@ class DishTestApiView(APITestCase):
 
     def test_get_all_dishes(self):
         response = self.client.get(self.url)
-        self.assertEqual(len(response.data), 10)
+        dish_count = Dish.objects.all().count()
+        self.assertEqual(len(response.data), dish_count)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_specific_dish(self):

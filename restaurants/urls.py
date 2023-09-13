@@ -3,6 +3,7 @@ from restaurants.views import *
 
 urlpatterns = [
     path("dish/", DishListCreateApiView.as_view()),
+    path("dish/html", dish_list_html),
     path("dish/<int:pk>/", DishRetrieveUpdateDeleteApiView.as_view()),
     path("restaurant/", RestaurantListCreateApiView.as_view()),
     path("restaurant/<int:pk>/", RestaurantRetrieveUpdateDeleteApiView.as_view()),

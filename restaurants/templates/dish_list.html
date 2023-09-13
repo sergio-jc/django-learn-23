@@ -1,0 +1,20 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% trans 'Dish list' %}</title>
+  </head>
+  <body>
+    <h1>{% trans 'Dish list' %}</h1>
+    <ul>
+        {% for dish in dishes %}
+            <li>
+                <h2>{{ dish.name }}</h2>
+                <img src="{{ dish.image }}" alt="{{ dish.name }}" width="200">
+            </li>
+        {% endfor %}
+    </ul>
+  </body>
+</html> 

@@ -32,7 +32,7 @@ class TableRetrieveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TableSerializer
 
 
-class OrderlistCreateApiView(generics.ListAPIView):
+class OrderlistCreateApiView(generics.ListCreateAPIView):
     permission_classes = [IsWaiter]
     queryset = Order.objects.all()
     serializer_class = BasicOrderSerializer
