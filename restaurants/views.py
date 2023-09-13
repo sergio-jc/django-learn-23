@@ -6,9 +6,10 @@ from restaurants.models import Dish, Restaurant, Menu
 from restaurants.serializers import *
 from restaurants.permissions import IsChef
 from restaurants.custom_list_create import CustomListCreateAPIView
-
+from rest_framework.throttling import UserRateThrottle
 
 class DishListCreateApiView(generics.ListCreateAPIView):
+    throttle_classes = [UserRateThrottle]
     permission_classes = [IsChef]
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
@@ -23,12 +24,14 @@ class DishListCreateApiView(generics.ListCreateAPIView):
 
 
 class DishRetrieveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
+    throttle_classes = [UserRateThrottle]
     permission_classes = [IsChef]
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
 
 
 class RestaurantListCreateApiView(CustomListCreateAPIView):
+    throttle_classes = [UserRateThrottle]
     permission_classes = [IsChef]
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
@@ -42,6 +45,7 @@ class RestaurantListCreateApiView(CustomListCreateAPIView):
 
 
 class RestaurantRetrieveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
+    throttle_classes = [UserRateThrottle]
     permission_classes = [IsChef]
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
@@ -49,6 +53,7 @@ class RestaurantRetrieveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIVie
 
 
 class MenuListCreateApiView(CustomListCreateAPIView):
+    throttle_classes = [UserRateThrottle]
     permission_classes = [IsChef]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
@@ -57,6 +62,7 @@ class MenuListCreateApiView(CustomListCreateAPIView):
 
 
 class MenuRetrieveUpdateDeleteApiView(generics.RetrieveUpdateDestroyAPIView):
+    throttle_classes = [UserRateThrottle]
     permission_classes = [IsChef]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
