@@ -19,7 +19,7 @@ class ConsumerListApiView(generics.ListAPIView):
     serializer_class = ConsumerSerializer
 
 
-class ConsumerRetrieveApiView(generics.RetrieveUpdateDestroyAPIView):
+class ConsumerRetrieveApiView(generics.RetrieveAPIView):
     queryset = Consumer.objects.all()
     serializer_class = ConsumerSerializer
 

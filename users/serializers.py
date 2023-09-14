@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from users.models import Consumer, Employee
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class BasicUserSerializer(serializers.ModelSerializer):
@@ -15,7 +15,9 @@ class BasicUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_created = User.objects.create_user(
-            validated_data["username"], validated_data["email"], validated_data["password"]
+            validated_data["username"],
+            validated_data["email"],
+            validated_data["password"],
         )
         user_created.first_name = validated_data["first_name"]
         user_created.last_name = validated_data["last_name"]
@@ -33,8 +35,19 @@ class ConsumerSerializer(serializers.ModelSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    user = BasicUserSerializer(read_only=True)
-
     class Meta:
         model = Employee
         fields = ["role", "user"]
+
+    def create(self, validated_data):
+        employee_created = super().create(validated_data)
+        user = validated_data["user"]
+        if employee_created.role == "CHEF":
+            chef_group = Group.objects.get(pk=1)
+            user.groups.add(chef_group)
+
+        if employee_created.role == "WAITER":
+            waiter_group = Group.objects.get(pk=2)
+            user.groups.add(waiter_group)
+
+        return employee_created
