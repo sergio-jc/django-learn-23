@@ -15,7 +15,7 @@ class DishTestApiView(APITestCase):
 
     def setUp(self):
         init_groups()
-        dish_fake_data.generate_dishes(testing_enviroment=True)
+        dish_fake_data.generate_dishes(testing_environment=True)
 
         created_user = User.objects.create_user("developer", "developer")
         chef_group = Group.objects.get(pk=1)
@@ -28,7 +28,7 @@ class DishTestApiView(APITestCase):
         response = self.client.get(self.url)
         dish_count = Dish.objects.all().count()
         self.assertEqual(len(response.data), dish_count)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.asserobjetEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_specific_dish(self):
         created_dish = Dish.objects.create(name=fake.word())

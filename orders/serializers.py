@@ -11,8 +11,8 @@ class TableSerializer(serializers.ModelSerializer):
 
 class BasicOrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Order
-        fields = ["id", "table", "is_completed", "created_at"]
+        model = Order
+        fields = ["id", "table", "is_completed", "created_at", "user"]
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
@@ -29,4 +29,4 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ["id", "table", "orderitem_set", "is_completed", "created_at"]
+        fields = ["id", "table", "orderitem_set", "is_completed", "created_at", "user"]

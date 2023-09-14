@@ -2,10 +2,12 @@
 # from django.core.mail import send_mail
 from django.db import models
 from restaurants.models import Dish
+from users.models import User
 from django.template.loader import render_to_string
 
 # sergio-03 : añadir traducciones
 from django.utils.translation import gettext as _
+
 # django-admin makemessage  -l es
 # django-admin compilemessages
 
@@ -22,6 +24,7 @@ class Table(models.Model):
 
 class Order(models.Model):
     table = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_completed = models.BooleanField(default=False, blank=True)
     dishes = models.ManyToManyField(
@@ -35,7 +38,14 @@ class Order(models.Model):
     def send_email(self):
         subject = _("Thank you for placing your order!")
         message = _("Your order has been received and is in process.")
-        context = {"subject": subject, "message": message}
+        footer = _("Thank you for trusting us.")
+        user_name = f"{self.user.first_name} {self.user.first_name}"
+        context = {
+            "subject": subject,
+            "message": message,
+            "user_name": user_name,
+            "footer": footer,
+        }
         html_message = render_to_string("order_email.html", context)
         print("🚀 email enviado =>", html_message)
         # from_email = settings.EMAIL_HOST_USER

@@ -18,13 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: orders/models.py:30
+#: orders/models.py:39
 msgid "Thank you for placing your order!"
 msgstr "¡Gracias por realizar su pedido! "
 
-#: orders/models.py:31
+#: orders/models.py:40
 msgid "Your order has been received and is in process."
 msgstr "Su pedido ha sido recibido y está en proceso."
+
+#: orders/models.py:41
+msgid "Thank you for trusting us."
+msgstr "Gracias por confiar en nosotros."
 
 #: orders/templates/index.html:11
 msgid "My name is Sergio"

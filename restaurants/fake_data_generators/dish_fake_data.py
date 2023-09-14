@@ -68,7 +68,7 @@ dishes = [
 ]
 
 
-def generate_dishes(testing_enviroment=False):
+def generate_dishes(testing_environment=False):
     for dish in dishes:
         dish_created, created = Dish.objects.get_or_create(
             name=dish.get("name"),
@@ -77,7 +77,7 @@ def generate_dishes(testing_enviroment=False):
             type=dish.get("type"),
         )
 
-        if testing_enviroment:
+        if testing_environment:
             return
 
         if created:

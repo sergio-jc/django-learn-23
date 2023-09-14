@@ -14,7 +14,12 @@ class BasicUserSerializer(serializers.ModelSerializer):
         fields = ["id", "first_name", "last_name", "email", "username", "password"]
 
     def create(self, validated_data):
-        user_created = super().create(validated_data)
+        user_created = User.objects.create_user(
+            validated_data["username"], validated_data["email"], validated_data["password"]
+        )
+        user_created.first_name = validated_data["first_name"]
+        user_created.last_name = validated_data["last_name"]
+        user_created.save()
         Consumer.objects.create(user=user_created, type=Consumer.NORMAL)
         return user_created
 
