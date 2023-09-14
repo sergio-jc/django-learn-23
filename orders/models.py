@@ -1,5 +1,5 @@
-# from django.conf import settings
-# from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db import models
 from restaurants.models import Dish
 from users.models import User
@@ -48,17 +48,17 @@ class Order(models.Model):
         }
         html_message = render_to_string("order_email.html", context)
         print("🚀 email enviado =>", html_message)
-        # from_email = settings.EMAIL_HOST_USER
-        # recipient_list = ["sergiojara0609@gmail.com"]
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = ["sergiojara0609@gmail.com"]
 
-        # send_mail(
-        #     subject,
-        #     message,
-        #     from_email,
-        #     recipient_list,
-        #     html_message=html_message,
-        #     fail_silently=False,
-        # )
+        send_mail(
+            subject,
+            message,
+            from_email,
+            recipient_list,
+            html_message=html_message,
+            fail_silently=False,
+        )
 
 
 class OrderItem(models.Model):
