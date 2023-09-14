@@ -40,6 +40,8 @@ class Dish(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=OTHER)
     menu = models.ManyToManyField(Menu, related_name="menu_item")
+
+    # sergio-06 : field para guardar imágenes de productos
     image = models.ImageField(blank=True, upload_to='dish/images/')
 
     def __str__(self):

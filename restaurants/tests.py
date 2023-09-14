@@ -9,13 +9,13 @@ from restaurants.fake_data_generators import dish_fake_data
 
 fake = Faker()
 
-
+# sergio-05 : test para un modelo para todas los métodos usando APITestCase
 class DishTestApiView(APITestCase):
     url = "/api/dish/"
 
     def setUp(self):
         init_groups()
-        dish_fake_data.generate_dishes()
+        dish_fake_data.generate_dishes(testing_enviroment=True)
 
         created_user = User.objects.create_user("developer", "developer")
         chef_group = Group.objects.get(pk=1)

@@ -3,6 +3,8 @@ from rest_framework import generics
 
 class CustomListCreateAPIView(generics.ListCreateAPIView):
     def get_serializer_context(self):
+
+        # sergio-02: pasarle el request al serializer
         context = super().get_serializer_context()
         context["request"] = self.request
 

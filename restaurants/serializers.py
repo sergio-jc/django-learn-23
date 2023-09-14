@@ -1,10 +1,11 @@
 from rest_framework.serializers import ModelSerializer
 from restaurants.models import Dish, Restaurant, Menu
-from drf_extra_fields.fields import Base64ImageField
+# from drf_extra_fields.fields import Base64ImageField
 
 
 class DishSerializer(ModelSerializer):
-    image = Base64ImageField(required=False)
+    # add image with base24 format
+    # image = Base64ImageField(required=False)
     class Meta:
         model = Dish
         fields = ["id", "name", "description", "price", "type", "image"]
@@ -25,6 +26,7 @@ class MenuSerializer(ModelSerializer):
         fields = ["id", "name", "updated_at", "restaurant", "menu_item"]
 
     def create(self, validated_data):
+        # sergio-02 : print de request en el serializer create 
         context_request = self.context["request"]
         print("request context => \n", context_request)
         restaurant = Restaurant.objects.get(pk=self.initial_data["restaurant"])
@@ -32,7 +34,6 @@ class MenuSerializer(ModelSerializer):
         return Menu.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        # print("🚀 => \n", self.initial_data["menu_item"])
         dish_ids = [dish["id"] for dish in self.initial_data["menu_item"]]
         instance.menu_item.set(dish_ids)
         return super().update(instance, validated_data)

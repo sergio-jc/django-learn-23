@@ -2,7 +2,7 @@
 
 from django.db import migrations
 
-# sergio: increase the price of dishes by 10%.
+# sergio-04: empty migration, incrementa el precio de los platillos en un 10%
 def increase_dish_price(apps, schema_editor):
     Dish = apps.get_model("restaurants", "Dish")
     for dish in Dish.objects.all():

@@ -27,4 +27,5 @@ urlpatterns = [
     path("api/", include("orders.urls")),
 ]
 
+# sergio-06 : permitir servir las imagenes por medio de la url
 urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

@@ -4,12 +4,12 @@ from users.models import *
 from users.serializers import *
 
 
-class UserListApiView(generics.ListAPIView):
+class UserListApiView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = BasicUserSerializer
 
 
-class UserRetraiveApiView(generics.RetrieveAPIView):
+class UserRetrieveApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = BasicUserSerializer
 
@@ -19,18 +19,18 @@ class ConsumerListApiView(generics.ListAPIView):
     serializer_class = ConsumerSerializer
 
 
-class ConsumerRetraiveApiView(generics.RetrieveAPIView):
+class ConsumerRetrieveApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Consumer.objects.all()
     serializer_class = ConsumerSerializer
 
 
-class EmployeeListApiView(generics.ListAPIView):
+class EmployeeListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAdminUser]
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
 
-class EmployeeRetraiveApiView(generics.RetrieveAPIView):
+class EmployeeRetrieveApiView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAdminUser]
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer

@@ -52,6 +52,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    # sergio-03 : middleware para identificar el idioma
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -66,7 +67,7 @@ ROOT_URLCONF = "dineflow.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -133,9 +134,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-MEDIA_URL = 'files/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR,'files')
+# sergio-06 : indica donde se guardaran las imagenes
+MEDIA_URL = "files/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "files")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -147,17 +148,19 @@ CORS_ALLOWED_ORIGINS = []
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
-    'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
+
+    # sergio-08 : Agregar Throttling
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
     ],
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '100/day', # anon: usuarios anònimos
-        'user': '1000/day' # user: usuarios logedos
-    }
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "100/day",  # anon: usuarios anònimos
+        "user": "1000/day",  # user: usuarios logedos
+    },
 }
 
-# Email 
+# Email
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'

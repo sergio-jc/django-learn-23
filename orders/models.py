@@ -3,7 +3,12 @@
 from django.db import models
 from restaurants.models import Dish
 from django.template.loader import render_to_string
+
+# sergio-03 : añadir traducciones
 from django.utils.translation import gettext as _
+# django-admin makemessage  -l es
+# django-admin compilemessages
+
 
 class Table(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -26,6 +31,7 @@ class Order(models.Model):
     def __str__(self):
         return f"Order for Table {self.table} at {self.created_at}"
 
+    # sergio-09 : custom method para mandarle un correo al cliente.
     def send_email(self):
         subject = _("Thank you for placing your order!")
         message = _("Your order has been received and is in process.")
