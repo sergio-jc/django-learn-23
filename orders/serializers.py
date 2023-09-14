@@ -14,6 +14,12 @@ class BasicOrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = ["id", "table", "is_completed", "created_at", "user"]
 
+    def create(self, validated_data):
+        order_created = super().create(validated_data)
+        if order_created.user:
+            order_created.send_email()
+        return order_created
+
 
 class OrderItemSerializer(serializers.ModelSerializer):
     dish = DishSerializer(read_only=True)
